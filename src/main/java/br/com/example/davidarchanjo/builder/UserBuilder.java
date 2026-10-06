@@ -10,17 +10,17 @@ public class UserBuilder {
 
     public User build(SignupRequestDTO dto, String encodedPassword) {
         return User.builder()
-            .email(dto.getEmail())
-            .password(encodedPassword)
-            .fullName(dto.getFullName())
-            .build();
+                .email(dto.getEmail())
+                .password(encodedPassword)
+                .fullName(dto.getFullName())
+                .build();
     }
 
     public AuthResponseDTO buildAuthResponse(User user) {
         return AuthResponseDTO.builder()
-            .id(user.getId())
-            .email(user.getEmail())
-            .fullName(user.getFullName())
-            .build();
+                .id(user.getId())
+                .email(user.getEmail())
+                .fullName(user.getFullName())
+                .build();
     }
 }
