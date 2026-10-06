@@ -1,6 +1,10 @@
 HELP.md
 /target/
 !.mvn/wrapper/maven-wrapper.jar
+app.tar 
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
 
 ### STS ###
 .apt_generated
