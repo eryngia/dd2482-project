@@ -17,7 +17,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>17</java.version> 
-    <javafaker.version>0.17.2</javafaker.version>
+    <javafaker.version>1.0.2</javafaker.version>
     <modelmapper.version>2.3.5</modelmapper.version>
     <jackson-bom.version>3.1.7</jackson-bom.version>
     <tomcat.version>11.0.25</tomcat.version>
@@ -94,6 +94,12 @@
       <groupId>com.github.javafaker</groupId>
       <artifactId>javafaker</artifactId>
       <version>${javafaker.version}</version>
+      <exclusions>
+        <exclusion>
+        <groupId>org.yaml</groupId>
+        <artifactId>snakeyaml</artifactId>
+        </exclusion>
+    </exclusions>
     </dependency>
 
     <!-- model mapper -->
