@@ -4,6 +4,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
+    <!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– DEMO -->
     <version>4.1.1</version> 
     <relativePath />
   </parent>
@@ -19,6 +20,7 @@
     <java.version>17</java.version> 
     <javafaker.version>0.17.2</javafaker.version>
     <modelmapper.version>2.3.5</modelmapper.version>
+    <!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– DEMO -->
     <jackson-bom.version>3.1.7</jackson-bom.version>
     <tomcat.version>11.0.25</tomcat.version>
   </properties>
