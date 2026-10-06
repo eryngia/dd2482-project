@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class AuthResponseDTO {
 
     private Long id;
+    
     private String email;
 
     @JsonProperty("fullName")

@@ -13,20 +13,20 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages = "br.com.example.davidarchanjo")
 public class CRUDRestApplication implements CommandLineRunner {
 
-  @Autowired
-  private AppService service;
+    @Autowired
+    private AppService service;
 
-  public static void main(String[] args) {
-    SpringApplication.run(CRUDRestApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(CRUDRestApplication.class, args);
+    }
 
-  /**
-   * The database is being populated from here because Spring Boot will
-   * automatically call the run method of all beans implementing
-   * CommandLineRunner interface after the application context has been loaded.
-   **/
-  @Override
-  public void run(String... args) {
-    service.populate();
-  }
+    /**
+     * The database is being populated from here because Spring Boot will
+     * automatically call the run method of all beans implementing
+     * CommandLineRunner interface after the application context has been loaded.
+     **/
+    @Override
+    public void run(String... args) {
+        service.populate();
+    }
 }

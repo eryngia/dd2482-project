@@ -6,7 +6,6 @@ import br.com.example.davidarchanjo.model.domain.App;
 import br.com.example.davidarchanjo.model.dto.AppDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-
 import lombok.AllArgsConstructor;
 
 @Component

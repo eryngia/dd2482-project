@@ -19,7 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository repository;
+
     private final UserBuilder builder;
+    
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
@@ -27,7 +29,7 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponseDTO signup(SignupRequestDTO dto) {
         if (repository.existsByEmail(dto.getEmail())) {
             throw new UserAlreadyExistsException(
-                String.format("User with email '%s' already exists", dto.getEmail()));
+                    String.format("User with email '%s' already exists", dto.getEmail()));
         }
 
         String encodedPassword = passwordEncoder.encode(dto.getPassword());
@@ -40,7 +42,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public AuthResponseDTO login(LoginRequestDTO dto) {
         User user = repository.findByEmail(dto.getEmail())
-            .orElseThrow(() -> new InvalidCredentialsException("Invalid email or password"));
+                .orElseThrow(() -> new InvalidCredentialsException("Invalid email or password"));
 
         if (!passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
             throw new InvalidCredentialsException("Invalid email or password");
