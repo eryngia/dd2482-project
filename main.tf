@@ -1,26 +1,53 @@
 terraform {
   required_providers {
     multipass = {
-      source  = "larstobi/multipass"
-      version = "~> 1.4.2"
+      source  = "todoroff/multipass"
+      version = "~> 2.1"
+    }
+    local = {
+      source  = "hashicorp/local"
+      version = "~> 2.5"
     }
   }
 }
 
-provider "multipass" {}
+provider "multipass" {
+  command_timeout = 1000
+}
+
+variable "image" {
+  type    = string
+  default = "ghcr.io/stefanprodan/podinfo:latest"
+}
+
+variable "container_port" {
+  type    = number
+  default = 9898
+}
+
+variable "host_port" {
+  type    = number
+  default = 8080
+}
+
+resource "local_file" "cloud_init" {
+  filename = "${path.module}/.rendered_cloud_init.cfg"
+  content = templatefile("${path.module}/cloud_init.tftpl", {
+    image          = var.image
+    container_port = var.container_port
+    host_port      = var.host_port
+  })
+}
 
 resource "multipass_instance" "springboot_vm" {
   name   = "springboot-vm"
-  cpus   = 2
-  memory = "2G"
-  disk   = "15G"
+  cpus   = 1
+  memory = "1G"
+  disk   = "5G"
   image  = "jammy" # Ubuntu 22.04 LTS
-
-  # Injects the configuration to install Docker inside the VM
-  cloudinit_file = "${path.module}/cloud_init.cfg"
+  cloud_init_file = local_file.cloud_init.filename
 }
 
-output "vm_ip" {
-  value       = multipass_instance.springboot_vm.ipv4
-  description = "The IP address of the actual VM"
+output "api_url" {
+  value = "http://${one(multipass_instance.springboot_vm.ipv4)}:${var.host_port}"
 }

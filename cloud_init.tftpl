@@ -1,0 +1,8 @@
+#cloud-config
+package_update: true
+packages:
+  - docker.io
+
+runcmd:
+  - systemctl enable --now docker
+  - docker run -d --name app --restart unless-stopped -p ${host_port}:${container_port} ${image}
