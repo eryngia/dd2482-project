@@ -5,6 +5,7 @@ app.tar
 .terraform/
 terraform.tfstate
 terraform.tfstate.backup
+.terraform.lock.hcl
 .rendered_cloud_init.cfg
 
 ### STS ###
