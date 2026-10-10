@@ -1,4 +1,6 @@
 terraform {
+  required_version = ">= 1.4"
+
   required_providers {
     multipass = {
       source  = "todoroff/multipass"
@@ -9,6 +11,8 @@ terraform {
       version = "~> 2.5"
     }
   }
+
+  backend "local" {}
 }
 
 provider "multipass" {
@@ -39,6 +43,10 @@ resource "local_file" "cloud_init" {
   })
 }
 
+resource "terraform_data" "image" {
+  input = var.image
+}
+
 resource "multipass_instance" "project_vm" {
   name   = "project-vm"
   cpus   = 1
@@ -46,8 +54,12 @@ resource "multipass_instance" "project_vm" {
   disk   = "5G"
   image  = "jammy" # Ubuntu 22.04 LTS
   cloud_init_file = local_file.cloud_init.filename
+
+  lifecycle {
+    replace_triggered_by = [terraform_data.image]
+  }
 }
 
 output "api_url" {
-  value = "http://${one(multipass_instance.project_vm.ipv4)}:${var.host_port}"
+  value = "http://${multipass_instance.project_vm.ipv4[0]}:${var.host_port}"
 }
