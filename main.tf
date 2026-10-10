@@ -22,7 +22,7 @@ variable "image" {
 
 variable "container_port" {
   type    = number
-  default = 9898
+  default = 8080
 }
 
 variable "host_port" {
@@ -39,8 +39,8 @@ resource "local_file" "cloud_init" {
   })
 }
 
-resource "multipass_instance" "springboot_vm" {
-  name   = "springboot-vm"
+resource "multipass_instance" "project_vm" {
+  name   = "project-vm"
   cpus   = 1
   memory = "1G"
   disk   = "5G"
@@ -49,5 +49,5 @@ resource "multipass_instance" "springboot_vm" {
 }
 
 output "api_url" {
-  value = "http://${one(multipass_instance.springboot_vm.ipv4)}:${var.host_port}"
+  value = "http://${one(multipass_instance.project_vm.ipv4)}:${var.host_port}"
 }

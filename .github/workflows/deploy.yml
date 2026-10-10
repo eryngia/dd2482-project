@@ -34,5 +34,10 @@ jobs:
       - name: Terraform init
         run: terraform init -input=false -backend-config="path=$HOME/.tfstate/springboot-vm.tfstate"
 
-      - name: Terraform Apply
+      - name: Terraform apply
         run: terraform apply -auto-approve -input=false
+
+      - name: Verify deployment
+        run: |
+          multipass exec springboot-vm -- cloud-init status --wait
+          multipass exec springboot-vm -- curl --fail --silent --show-error --retry 30 --retry-delay 5 --retry-connrefused http://localhost:8080/actuator/health
