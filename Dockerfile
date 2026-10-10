@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jre
+FROM eclipse-temurin:17-jre-noble
 
 RUN groupadd --system app && useradd --system --gid app --no-create-home app
 WORKDIR /app
