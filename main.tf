@@ -17,7 +17,7 @@ provider "multipass" {
 
 variable "image" {
   type    = string
-  default = "ghcr.io/stefanprodan/podinfo:latest"
+  default = "ghcr.io/eryngia/dd2482-project:latest"
 }
 
 variable "container_port" {
